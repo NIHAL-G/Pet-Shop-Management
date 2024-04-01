@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0f93285b03844763b6eb508dec8e56aa" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="WebsiteModel.UserRegister" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteModel.AdminRegister" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="WebsiteModel.Pet" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteModel.AddtoCart" Width="1.5" PointX="3" PointY="4.125" />
+        <AssociationConnector Association="WebsiteModel.FK__AddtoCart__Id__5CD6CB2B" />
+        <EntityTypeShape EntityType="WebsiteModel.Buy" Width="1.5" PointX="3" PointY="8" />
+        <AssociationConnector Association="WebsiteModel.FK__Buy__Id__6FE99F9F" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
