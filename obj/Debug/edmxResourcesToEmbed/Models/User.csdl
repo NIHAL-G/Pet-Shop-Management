@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WebsiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="UserRegister">
+    <Key>
+      <PropertyRef Name="Userid" />
+    </Key>
+    <Property Name="Userid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="WebsiteEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="UserRegisters" EntityType="Self.UserRegister" />
+    <EntitySet Name="AdminRegisters" EntityType="WebsiteModel.AdminRegister" />
+    <EntitySet Name="Pets" EntityType="WebsiteModel.Pet" />
+    <EntitySet Name="AddtoCarts" EntityType="WebsiteModel.AddtoCart" />
+    <AssociationSet Name="FK__AddtoCart__Id__5CD6CB2B" Association="WebsiteModel.FK__AddtoCart__Id__5CD6CB2B">
+      <End Role="Pet" EntitySet="Pets" />
+      <End Role="AddtoCart" EntitySet="AddtoCarts" />
+    </AssociationSet>
+    <EntitySet Name="Buys" EntityType="WebsiteModel.Buy" />
+    <AssociationSet Name="FK__Buy__Id__6FE99F9F" Association="WebsiteModel.FK__Buy__Id__6FE99F9F">
+      <End Role="Pet" EntitySet="Pets" />
+      <End Role="Buy" EntitySet="Buys" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AdminRegister">
+    <Key>
+      <PropertyRef Name="Adminid" />
+    </Key>
+    <Property Name="Adminid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AdminName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Pet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Species" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Breed" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+    <Property Name="IsAvailable" Type="Boolean" />
+    <NavigationProperty Name="AddtoCarts" Relationship="WebsiteModel.FK__AddtoCart__Id__5CD6CB2B" FromRole="Pet" ToRole="AddtoCart" />
+    <Property Name="Price" Type="Int32" />
+    <NavigationProperty Name="Buys" Relationship="WebsiteModel.FK__Buy__Id__6FE99F9F" FromRole="Pet" ToRole="Buy" />
+  </EntityType>
+  <EntityType Name="AddtoCart">
+    <Key>
+      <PropertyRef Name="cardId" />
+    </Key>
+    <Property Name="cardId" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" />
+    <NavigationProperty Name="Pet" Relationship="WebsiteModel.FK__AddtoCart__Id__5CD6CB2B" FromRole="AddtoCart" ToRole="Pet" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" />
+  </EntityType>
+  <Association Name="FK__AddtoCart__Id__5CD6CB2B">
+    <End Type="WebsiteModel.Pet" Role="Pet" Multiplicity="0..1" />
+    <End Type="WebsiteModel.AddtoCart" Role="AddtoCart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AddtoCart">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Buy">
+    <Key>
+      <PropertyRef Name="orderid" />
+    </Key>
+    <Property Name="orderid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Id" Type="Int32" />
+    <NavigationProperty Name="Pet" Relationship="WebsiteModel.FK__Buy__Id__6FE99F9F" FromRole="Buy" ToRole="Pet" />
+    <Property Name="BuyDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <Association Name="FK__Buy__Id__6FE99F9F">
+    <End Type="WebsiteModel.Pet" Role="Pet" Multiplicity="0..1" />
+    <End Type="WebsiteModel.Buy" Role="Buy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Buy">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
